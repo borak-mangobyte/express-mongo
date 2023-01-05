@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { InsertOneResult } from 'mongodb'
 import { ZodError } from 'zod'
-import { Post, Posts, PostWithId } from './post.model'
+import { Post, Posts } from './post.model'
 
 export async function findAll(req: Request, res: Response) {
   const result = Posts.find()
