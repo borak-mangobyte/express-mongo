@@ -1,1 +1,1 @@
-# express-mongo
+# typescript-express-mongo
