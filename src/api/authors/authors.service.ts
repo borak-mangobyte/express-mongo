@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import Post from './post.model'
+import Author from './authors.model'
 
 export async function createOne(
   req: Request,
@@ -7,9 +7,10 @@ export async function createOne(
   next: NextFunction
 ) {
   try {
-    const post = new Post(req.body)
-    const createdPost = await post.save()
-    res.status(201).json(createdPost)
+    const author = new Author(req.body)
+    const savedAuthor = await author.save()
+    res.json(savedAuthor)
+    res.status(201)
   } catch (error) {
     console.log(error)
     res.status(422)
@@ -18,7 +19,7 @@ export async function createOne(
 }
 
 export async function findAll(req: Request, res: Response) {
-  const data = Post.find()
-  const posts = await data
-  res.json(posts)
+  const data = Author.find()
+  const authors = await data
+  res.json(authors)
 }

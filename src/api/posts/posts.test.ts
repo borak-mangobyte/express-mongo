@@ -1,11 +1,10 @@
-import { response } from 'express'
 import request from 'supertest'
 import app from '../../app'
-import { Posts } from './post.model'
+import Post from './post.model'
 
 beforeAll(async () => {
   try {
-    await Posts.drop()
+    await Post.collection.drop()
   } catch (error) {}
 })
 

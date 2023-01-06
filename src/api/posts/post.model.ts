@@ -1,14 +1,30 @@
-import * as z from 'zod'
-import { WithId } from 'mongodb'
-import { db } from '../../database/db'
+import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
-export const Post = z.object({
-  title: z.string().min(1),
-  content: z.string().min(1),
-  author: z.string().default('John Doe'),
-  isPublished: z.boolean().default(false),
-})
+const PostSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      default: 'borak-mango',
+    },
+    isPublished: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
 
-export type Post = z.infer<typeof Post>
-export type PostWithId = WithId<Post>
-export const Posts = db.collection<Post>('posts')
+const Post = mongoose.model('Post', PostSchema)
+
+export default Post
