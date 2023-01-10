@@ -13,7 +13,7 @@ const PostSchema = new Schema(
     },
     author: {
       type: String,
-      default: 'borak-mango',
+      required: true,
     },
     isPublished: {
       type: Boolean,

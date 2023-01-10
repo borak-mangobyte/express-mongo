@@ -21,7 +21,6 @@ describe('GET /api/v1/posts', () => {
       }))
 })
 
-// Expected to fail with 422 code
 describe('POST /api/v1/posts', () => {
   it('responds with an error if the post is invalid', async () =>
     request(app)
@@ -34,5 +33,26 @@ describe('POST /api/v1/posts', () => {
       .expect(422)
       .then((response) => {
         expect(response.body).toHaveProperty('message')
+      }))
+})
+
+describe('POST /api/v1/posts', () => {
+  it('responds with 201 if successfully created a post', async () =>
+    request(app)
+      .post('/api/v1/posts')
+      .set('Accept', 'application/json')
+      .send({
+        title: 'Testing title',
+        content: 'Testing content',
+        author: 'Testing author',
+        isPublished: false,
+      })
+      .expect('Content-Type', /json/)
+      .expect(201)
+      .then((response) => {
+        expect(response.body).toHaveProperty('title')
+        expect(response.body).toHaveProperty('content')
+        expect(response.body).toHaveProperty('author')
+        expect(response.body).toHaveProperty('isPublished')
       }))
 })
